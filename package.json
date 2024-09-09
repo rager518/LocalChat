@@ -2,16 +2,15 @@
   "name": "chat",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc src/app.ts src/chats/server.ts --outDir ./dist && npx tsc --watch",
-    "dev": "npx tsc src/chats/server.ts --outDir ./dist && node dist/server.js",
+    "dev": "npx tsc src/chats/server.ts --outDir ./dist --sourceMap && node dist/server.js",
+    "dev-ts": "npx tsc src/chats/server.ts --outDir ./dist --sourceMap",
     "watch": "tsc --watch",
-
     "d": "concurrently \"vite --host\" \"npm run dev\"",
-
-    "vite": "vite",
+    "vite": "vite --host",
     "vite-build": "vite build",
     "vite-serve": "vite preview"
   },
@@ -27,6 +26,7 @@
   "devDependencies": {
     "@types/ws": "^8.5.12",
     "concurrently": "^9.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   }
 }

@@ -106,7 +106,7 @@
                                             <path d="M9.5 15a3.5 3.5 0 0 0 5 0"></path>
                                         </svg>
                                     </a> -->
-                                    <a href="#" class="link-secondary ms-2" data-bs-toggle="tooltip"
+                                    <a href="#" class="link-secondary ms-2" onclick="document.querySelector('#fileInput').click()" data-bs-toggle="tooltip"
                                         aria-label="Add notification" data-bs-original-title="Add notification">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -125,6 +125,7 @@
             </div>
         </div>
     </div>
+    <input type="file" id="fileInput" style="display: none;"/>
     <!-- <script type="module" src="./dist/app.js"></script> -->
     <script type="module" src="/src/app.ts"></script>
 </body>

@@ -1,8 +1,10 @@
 import { WebSocketServer } from "ws";
 import * as dotenv from 'dotenv'
+import * as fs from 'fs';
+
 dotenv.config();
 
-const host = process.env.WS_SERVER;  
+const host = process.env.WS_SERVER;
 const port: number = parseInt(process.env.WS_PORT || '8080');
 
 const wss = new WebSocketServer({ host, port });
@@ -12,18 +14,34 @@ wss.on('connection', (ws, req) => {
 
   console.log(`Client connected: ${clientIp}`);
 
-  ws.on('message', (message: string) => {
-    console.log('Receivedd: %s', message);
-
+  ws.on('message', (data: string) => {
     let textMessage: string;
 
-    if (Buffer.isBuffer(message)) {
-      textMessage = message.toString();
-    } else if (typeof message === 'string') {
-      textMessage = message;
-    } else {
-      console.error('Unsupported message type:', typeof message);
-      return;
+    try {
+      const msg = JSON.parse(data.toString());
+      const { type, content } = msg;
+
+      if (type) {
+        if (Buffer.isBuffer(content)) {
+          textMessage = content.toString();
+        } else if (typeof content === 'string') {
+          textMessage = content;
+        } else {
+          console.error('Unsupported message type:', typeof content);
+          return;
+        }
+      }
+
+    } catch (err) {
+      const filePath = `dist/[BLOB]`;
+      textMessage = filePath;
+      fs.writeFile(filePath, Buffer.from(data), (err) => {
+        if (err) {
+          console.error('Error saving file:', err);
+        } else {
+          console.log('File saved successfully');
+        }
+      });
     }
 
     wss.clients.forEach((client) => {

@@ -27,3 +27,4 @@ packages/
 debug/
 bin/
 obj/
+dist/

@@ -4,6 +4,7 @@ const port = import.meta.env.VITE_WS_PORT;
 const chatbox = document.getElementById('chatbox') as HTMLDivElement;
 const messageInput = document.getElementById('message') as HTMLInputElement;
 const sendBtn = document.getElementById('sendBtn') as HTMLButtonElement;
+const fileBtn = document.getElementById('fileInput') as HTMLInputElement;
 
 
 const ws = new WebSocket(`ws://${host}:${port}`);
@@ -66,7 +67,8 @@ ws.onmessage = (event) => {
 function sendMessage() {
   const message = messageInput.value;
   if (message.trim()) {
-    ws.send(message);
+    const msg = JSON.stringify({ type: 'text', content: message.trim()});
+    ws.send(msg);
     messageInput.value = '';
   }
 }
@@ -81,4 +83,19 @@ sendBtn.onclick = () => {
   sendMessage();
 };
 
-export {}
+fileBtn.onchange = (event) => {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.result) {
+        ws.send(reader.result);
+        console.log('File sent via WebSocket');
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  }
+}
+
+export { }
