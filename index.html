@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/tabler.min.css" rel="stylesheet" />
+    <title>Local Chat</title>
+</head>
+
+<body>
+    <div class="page-body-1">
+        <div class="container-xl">
+            <div class="card">
+                <div class="row g-0">
+                    <div class="col-12  d-flex flex-column">
+                        <div class="card-body scrollable" style="height: 35rem">
+                            <div class="chat">
+                                <div id="chatbox" class="chat-bubbles">
+                                    <!-- <div class="chat-item">
+                                        <div class="row align-items-end justify-content-end">
+                                            <div class="col col-lg-6">
+                                                <div class="chat-bubble chat-bubble-me">
+                                                    <div class="chat-bubble-title">
+                                                        <div class="row">
+                                                            <div class="col chat-bubble-author">Paweł Kuna</div>
+                                                            <div class="col-auto chat-bubble-date">09:32</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="chat-bubble-body">
+                                                        <p>Hey guys, I just pushed a new commit on the <code>dev</code>
+                                                            branch. Can you have a look and tell me what you think?</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto"><span class="avatar"
+                                                    style="background-image: url(./img/agent.jpg)"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="chat-item">
+                                        <div class="row align-items-end">
+                                            <div class="col-auto"><span class="avatar"
+                                                    style="background-image: url(./img/user.jpg)"></span>
+                                            </div>
+                                            <div class="col col-lg-6">
+                                                <div class="chat-bubble">
+                                                    <div class="chat-bubble-title">
+                                                        <div class="row">
+                                                            <div class="col chat-bubble-author">Mallory Hulme</div>
+                                                            <div class="col-auto chat-bubble-date">09:34</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="chat-bubble-body">
+                                                        <p>Sure Paweł, let me pull the latest updates.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+ -->
+                                    <!-- <div class="chat-item">
+                                        <div class="row align-items-end">
+                                            <div class="col-auto"><span class="avatar"
+                                                    style="background-image: url(./img/user.jpg)"></span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="chat-bubble">
+                                                    <div class="chat-bubble-body">
+                                                        <p class="text-secondary text-italic">typing<span
+                                                                class="animated-dots"></span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="input-group input-group-flat">
+                                <input id="message" type="text" class="form-control" autocomplete="off"
+                                    placeholder="Type message">
+                                <span class="input-group-text">
+                                    <a id="sendBtn" href="javascript:void(0)" class="link-secondary" data-bs-toggle="tooltip"
+                                    aria-label="Clear search" data-bs-original-title="Clear search">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-send">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M10 14l11 -11" />
+                                            <path
+                                                d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
+                                        </svg>
+                                    </a>
+                                    <!-- <a href="#" class="link-secondary" data-bs-toggle="tooltip"
+                                        aria-label="Clear search" data-bs-original-title="Clear search">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="icon">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                                            <path d="M9 10l.01 0"></path>
+                                            <path d="M15 10l.01 0"></path>
+                                            <path d="M9.5 15a3.5 3.5 0 0 0 5 0"></path>
+                                        </svg>
+                                    </a> -->
+                                    <a href="#" class="link-secondary ms-2" data-bs-toggle="tooltip"
+                                        aria-label="Add notification" data-bs-original-title="Add notification">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="icon">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path
+                                                d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <script type="module" src="./dist/app.js"></script> -->
+    <script type="module" src="/src/app.ts"></script>
+</body>
+
+</html>
