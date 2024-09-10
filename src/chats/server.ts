@@ -14,7 +14,7 @@ wss.on('connection', (ws, req) => {
 
   console.log(`Client connected: ${clientIp}`);
 
-  ws.on('message', (data: string) => {
+  ws.on('message', (data: any) => {
     let textMessage: string;
 
     try {
@@ -33,9 +33,21 @@ wss.on('connection', (ws, req) => {
       }
 
     } catch (err) {
-      const filePath = `dist/[BLOB]`;
+
+      const dataView = new Uint8Array(data);
+
+      const lengthView = new DataView(dataView.buffer, dataView.byteOffset, dataView.byteLength);
+      const fileNameLength: number = lengthView.getUint16(0, true);
+
+      const fileNameBytes = dataView.slice(2, 2 + fileNameLength);
+      const fileName = new TextDecoder().decode(fileNameBytes).trim();
+
+      console.log('Received file name:', fileName);
+
+      const fileContent = dataView.slice(2 + fileNameLength);
+      const filePath = `dist/${fileName}`;
       textMessage = filePath;
-      fs.writeFile(filePath, Buffer.from(data), (err) => {
+      fs.writeFile(filePath, Buffer.from(fileContent), (err) => {
         if (err) {
           console.error('Error saving file:', err);
         } else {

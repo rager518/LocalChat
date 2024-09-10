@@ -67,7 +67,7 @@ ws.onmessage = (event) => {
 function sendMessage() {
   const message = messageInput.value;
   if (message.trim()) {
-    const msg = JSON.stringify({ type: 'text', content: message.trim()});
+    const msg = JSON.stringify({ type: 'text', content: message.trim() });
     ws.send(msg);
     messageInput.value = '';
   }
@@ -90,8 +90,19 @@ fileBtn.onchange = (event) => {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.result) {
-        ws.send(reader.result);
-        console.log('File sent via WebSocket');
+        const arrayBuffer = reader.result as ArrayBuffer;
+        const fileName = file.name;
+        const encoder = new TextEncoder();
+        const fileNameBytes = encoder.encode(fileName);
+        const fileNameLength = new Uint16Array([fileNameBytes.length]);
+
+        const combinedBuffer = new Uint8Array(2 + fileNameBytes.length + arrayBuffer.byteLength);
+
+        combinedBuffer.set(new Uint8Array(fileNameLength.buffer), 0);
+        combinedBuffer.set(fileNameBytes, 2);
+        combinedBuffer.set(new Uint8Array(arrayBuffer), 2 + fileNameBytes.length);
+
+        ws.send(combinedBuffer.buffer);
       }
     };
     reader.readAsArrayBuffer(file);
